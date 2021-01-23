@@ -19,7 +19,7 @@
     "build": "vitepress build ."
   },
   "dependencies": {
-    "vue-monorepo-lib": "*"
+    "@linusborg/vue-teleport-plus": "*"
   },
   "devDependencies": {
     "vitepress": "^0.11.4"

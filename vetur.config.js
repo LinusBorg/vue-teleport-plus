@@ -3,5 +3,9 @@ module.exports = {
     'vetur.useWorkspaceDependencies': true,
     'vetur.experimental.templateInterpolationService': true,
   },
-  projects: ['./packages/lib', './packages/docs', './packages/playground'],
+  projects: [
+    './packages/teleport-plus',
+    './packages/docs',
+    './packages/playground',
+  ],
 }
