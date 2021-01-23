@@ -1,8 +1,10 @@
 import { App } from 'vue'
-import MyComponent from './Component.vue'
+import TeleportOutlet from './TeleportOutlet.vue'
+import TeleportSource from './TeleportSource.vue'
+import { createCoordinator, coordinatorKey } from './coordinator'
 
 export default function install(app: App) {
-  app.component('MyComponent', MyComponent)
+  app.provide(coordinatorKey, createCoordinator())
 }
 
-export { MyComponent, install }
+export { install, TeleportOutlet, TeleportSource }
