@@ -1,16 +1,18 @@
 <template>
-  <HelloWorld msg="Hello Vue 3.0 + Vite" />
-  <MyComponent />
+  <Source />
+  <hr />
+  <Outlet />
 </template>
 
-<script>
-import HelloWorld from './components/HelloWorld.vue'
-// import { MyComponent } from 'vue-monorepo-lib' // -> registered via plugin in main.js
+<script lang="ts">
+import Source from './components/Source.vue'
+import Outlet from './components/Outlet.vue'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld,
+    Source,
+    Outlet,
   },
 }
 </script>

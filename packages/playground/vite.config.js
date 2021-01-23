@@ -9,6 +9,12 @@ export default {
   },
   plugins: [vue()],
   optimizeDeps: {
-    exclude: ['postcss', 'autoprefixer', '@tailwindcss/postcss7-compat'],
+    exclude: [
+      '@linusborg/vue-teleport-plus',
+      'postcss',
+      'autoprefixer',
+      '@tailwindcss/postcss7-compat',
+    ],
+    link: ['@linusborg/vue-teleport-plus'],
   },
 }

@@ -21,7 +21,7 @@
     "typecheck": "vuedx-typecheck src",
     "typecheck:watch": "vuedx-typecheck  src --watch",
     "lint": "eslint 'src/**/*.{ts,vue}'",
-    "test": "jest --config ../../jest.config.ts",
+    "test": "jest --config ../../config/jest.config.ts .",
     "test:w": "jest --config ../../config/jest.config.ts --watch --runInBand"
   },
   "dependencies": {

@@ -1,6 +1,6 @@
 import type { Config } from '@jest/types'
 const config: Config.InitialOptions = {
-  rootDir: '.',
+  rootDir: process.cwd(),
   preset: 'ts-jest',
   globals: {},
   testEnvironment: 'jsdom',

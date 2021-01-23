@@ -4,11 +4,11 @@ import {
   defineProps,
   nextTick,
   onBeforeUnmount,
-  onBeforeUpdate,
+  onMounted,
   onUpdated,
 } from 'vue'
 import { injectCoordinator } from './coordinator'
-import { stableSort } from './stabelSort'
+import { stableSort } from './stableSort'
 const props = defineProps({
   name: {
     type: String,
@@ -22,7 +22,7 @@ const props = defineProps({
 
 const coordinator = injectCoordinator()
 const targets = computed(() => {
-  const state = coordinator.outletTargets[props.name]
+  const state = coordinator.outletTargets[props.name] ?? {}
   const targets = Object.keys(state)
   return stableSort(
     targets,
@@ -30,15 +30,11 @@ const targets = computed(() => {
   )
 })
 
-const elementsRefs: HTMLElement[] = []
-const addElement = (el: HTMLElement) => elementsRefs.push(el)
-
-onBeforeUpdate(() => {
-  elementsRefs.length = 0
+onMounted(async () => {
+  await nextTick()
+  targets.value.forEach((t) => coordinator.activateTarget(props.name, t))
 })
 onUpdated(async () => {
-  // after nextTick:
-  // coordinator.updateActiveTargets(targets.value)
   await nextTick()
   targets.value.forEach((t) => coordinator.activateTarget(props.name, t))
 })
@@ -47,15 +43,22 @@ onBeforeUnmount(() => {
   // I doubt that we can do this in a synchronous way though,
   // so it will likely require additional hacks? at least when leave transitions are involved
   // targets.value.map(t => coordinator.deactivateTarget(t))
-  targets.value.forEach((t) => coordinator.deactivateTarget(props.name, t))
+  targets.value.forEach((t) => {
+    coordinator.deactivateTarget(props.name, t)
+    coordinator.bus.emit(t)
+  })
 })
 </script>
 <template>
-  <component
-    v-for="id in targets"
-    :key="id"
-    :id="id"
-    :is="tag"
-    :ref="addElement"
-  />
+  <template v-if="$slots.wrapper">
+    <slot name="wrapper" v-for="id in targets" :id="id" />
+  </template>
+  <template v-else>
+    <component
+      v-for="id in targets"
+      :is="tag"
+      :key="id"
+      :data-teleport-plus="id"
+    />
+  </template>
 </template>

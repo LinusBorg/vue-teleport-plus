@@ -1,9 +1,9 @@
 import { createApp } from 'vue'
-import VueMonoRepoLib from 'vue-monorepo-lib'
+import tpplus from '@linusborg/vue-teleport-plus'
 import App from './App.vue'
 import './index.css'
 
 const app = createApp(App)
 
-app.use(VueMonoRepoLib)
+app.use(tpplus)
 app.mount('#app')
