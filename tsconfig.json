@@ -1,0 +1,31 @@
+{
+  "compilerOptions": {
+    "baseUrl": "./",
+    "module": "esnext",
+    "lib": ["dom", "esnext"],
+    "importHelpers": true,
+    "declaration": true,
+    "sourceMap": true,   
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "moduleResolution": "node",
+    "jsx": "preserve",
+    "esModuleInterop": true,
+    "types": ["vite/client", "jest"],
+    "paths": {
+      "vue-monorepo-lib": ["./packages/lib/src/index.ts"]
+    }
+  },
+  "include": [
+    "/**/src/**/*.ts",
+    "/**/src/**/*.js",
+    "/**/src/**/*.vue",
+    "/cypress/**/*.js",
+    // necessary for un-breaking jest types broken by cypress' chai dependency
+    // https://github.com/cypress-io/cypress/issues/1087#issuecomment-353370449
+    "./node_modules/jest", 
+  ]
+}
