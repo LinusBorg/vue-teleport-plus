@@ -43,6 +43,7 @@ onBeforeUnmount(() => {
   // I doubt that we can do this in a synchronous way though,
   // so it will likely require additional hacks? at least when leave transitions are involved
   // targets.value.map(t => coordinator.deactivateTarget(t))
+  console.log('unmounting')
   targets.value.forEach((t) => {
     coordinator.deactivateTarget(props.name, t)
     coordinator.bus.emit(t)

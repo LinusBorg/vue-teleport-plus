@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { TeleportSource } from '@linusborg/vue-teleport-plus'
+import TestContent from './TestContent.vue'
 import { ref } from 'vue'
 
 const disabled = ref(true)
@@ -15,5 +16,6 @@ const toggle = () => (disabled.value = !disabled.value)
   <hr />
   <TeleportSource to="myOutlet" :disabled="disabled">
     <p>this is our content we want to teleport</p>
+    <TestContent />
   </TeleportSource>
 </template>

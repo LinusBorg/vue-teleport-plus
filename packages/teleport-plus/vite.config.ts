@@ -1,17 +1,34 @@
-import { defineConfig } from 'vite'
+import { UserConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
+import ts from 'rollup-plugin-typescript2'
 
 import path from 'path'
-module.exports = defineConfig({
-  plugins: [vue()],
+export default <UserConfig>{
+  plugins: [
+    vue(),
+    {
+      apply: 'build',
+      ...ts({
+        tsconfig: './tsconfig.build.json',
+        useTsconfigDeclarationDir: true,
+      }),
+    },
+  ],
+  esbuild: false,
   build: {
     lib: {
-      entry: path.join(__dirname, 'src/index.ts'),
-      name: 'VueMonorepoLib',
+      entry: 'src/index.ts',
+      name: 'VueTeleportPlus',
     },
     minify: false,
     rollupOptions: {
       external: ['vue'],
+      output: {
+        exports: 'named',
+        globals: {
+          vue: 'Vue',
+        },
+      },
     },
   },
-})
+}

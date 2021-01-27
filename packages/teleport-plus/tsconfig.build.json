@@ -4,6 +4,7 @@
   "include": ["src/**/*.vue", "src/**/*.ts"],
   "compilerOptions": {
     "declaration": true,
-    "declarationDir": "types"
+    "declarationDir": "types",
+    "rootDir": "src",
   }
 }

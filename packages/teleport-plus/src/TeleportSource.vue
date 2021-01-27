@@ -1,14 +1,26 @@
-<script lang="ts" setup>
+<script lang="ts" setup="">
 import {
   computed,
   defineProps,
   getCurrentInstance,
   nextTick,
-  onMounted,
   onUnmounted,
-  onUpdated,
+  defineEmit,
+  watch,
+  // hack for : https://github.com/vuejs/vue-next/issues/2855
+  Teleport as teleport_,
+  TeleportProps,
+  VNodeProps,
+  // hack end
 } from 'vue'
 import { injectCoordinator } from './coordinator'
+
+// Hack for: https://github.com/vuejs/vue-next/issues/2855
+const Teleport = teleport_ as {
+  new (): {
+    $props: VNodeProps & TeleportProps
+  }
+}
 
 const props = defineProps({
   disabled: {
@@ -27,23 +39,34 @@ const props = defineProps({
     default: Infinity,
   },
 })
-const selector = computed(() => `[data-teleport-plus="${props.name}"]`)
+const emit = defineEmit(['outletMounted'])
+
+const selector = () => `[data-teleport-plus="${props.name}"]`
+
 const vm = getCurrentInstance()
 const update = () => {
+  console.log('forcing update as outlet unmounts')
   vm?.update()
 }
 
 const coordinator = injectCoordinator()
-const isTargetInDOM = computed(() => {
-  const target = coordinator.outletTargets[props.to]?.[props.name]
-  return !!target?.active && !!document.querySelector(selector.value)
-})
 coordinator.addTargetToOutlet(props.to, props.name, props.order)
 // when the Outlet unmounts, we get a synchronous event emitted
 // which we can use to directly update the Source
 // this - hopefully - will allow the teleport to unmount from the target properly
 // if that doesn't work, we need to find other workarounds.
 coordinator.bus.on(props.name, update)
+const isTargetInDOM = computed(() => {
+  const target = coordinator.outletTargets[props.to]?.[props.name]
+  return !!target?.active && !!document.querySelector(selector())
+})
+watch(
+  () => isTargetInDOM.value,
+  (value) => {
+    console.log('Source emitting `outletMounted:`', true)
+    emit('outletMounted', value)
+  }
+)
 
 onUnmounted(async () => {
   const { to, name } = props
@@ -55,7 +78,12 @@ onUnmounted(async () => {
 
 <template>
   <h2>Below this headline is the teleport component.</h2>
-  <teleport v-if="isTargetInDOM" :to="selector" :disabled="props.disabled">
+  <component
+    :is="Teleport"
+    v-if="isTargetInDOM"
+    :to="selector()"
+    :disabled="props.disabled"
+  >
     <slot></slot>
-  </teleport>
+  </component>
 </template>
