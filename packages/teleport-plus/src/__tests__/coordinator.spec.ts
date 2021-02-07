@@ -1,4 +1,4 @@
-import { coordinatorKey, createCoordinator } from '../coordinator'
+import { createCoordinator } from '../coordinator'
 
 describe('Coordinator', () => {
   test('works', () => {

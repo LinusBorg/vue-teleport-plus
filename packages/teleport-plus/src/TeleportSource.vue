@@ -1,4 +1,4 @@
-<script lang="ts" setup="">
+<script lang="ts" setup>
 import {
   computed,
   defineProps,
@@ -9,10 +9,10 @@ import {
   watch,
   // hack for : https://github.com/vuejs/vue-next/issues/2855
   Teleport as teleport_,
-  TeleportProps,
-  VNodeProps,
+  onUpdated,
   // hack end
 } from 'vue'
+import type { TeleportProps, VNodeProps } from 'vue'
 import { injectCoordinator } from './coordinator'
 
 // Hack for: https://github.com/vuejs/vue-next/issues/2855
@@ -41,9 +41,8 @@ const props = defineProps({
 })
 const emit = defineEmit(['outletMounted'])
 
-const selector = () => `[data-teleport-plus="${props.name}"]`
-
 const vm = getCurrentInstance()
+console.log('vm', vm)
 const update = () => {
   console.log('forcing update as outlet unmounts')
   vm?.update()
@@ -56,17 +55,28 @@ coordinator.addTargetToOutlet(props.to, props.name, props.order)
 // this - hopefully - will allow the teleport to unmount from the target properly
 // if that doesn't work, we need to find other workarounds.
 coordinator.bus.on(props.name, update)
-const isTargetInDOM = computed(() => {
+const isTargetActive = computed(() => {
   const target = coordinator.outletTargets[props.to]?.[props.name]
-  return !!target?.active && !!document.querySelector(selector())
+  return !!target?.active
 })
+
+const selector = computed(() =>
+  isTargetActive.value && !props.disabled
+    ? `[data-teleport-plus="${props.name}"]`
+    : '[data-teleport-plus-fallback-target]'
+)
+
 watch(
-  () => isTargetInDOM.value,
+  () => isTargetActive.value,
   (value) => {
-    console.log('Source emitting `outletMounted:`', true)
+    console.log('Source emitting `outletMounted`')
     emit('outletMounted', value)
   }
 )
+
+onUpdated(() => {
+  console.log(vm)
+})
 
 onUnmounted(async () => {
   const { to, name } = props
@@ -77,11 +87,13 @@ onUnmounted(async () => {
 </script>
 
 <template>
+  <p>disabled: {{ props.disabled }}</p>
+  <p>isTargetActive: {{ isTargetActive }}</p>
   <h2>Below this headline is the teleport component.</h2>
   <component
     :is="Teleport"
-    v-if="isTargetInDOM"
-    :to="selector()"
+    v-if="isTargetActive || disabled"
+    :to="selector"
     :disabled="props.disabled"
   >
     <slot></slot>

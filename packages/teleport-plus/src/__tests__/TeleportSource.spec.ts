@@ -1,7 +1,7 @@
 import { mount } from '@vue/test-utils'
 import TeleportSource from '../TeleportSource.vue'
 import { createCoordinator, coordinatorKey } from '../coordinator'
-import { DefineComponent, h, nextTick } from 'vue'
+import { h, nextTick } from 'vue'
 
 const mountSource = (
   options: Record<string, any> = {},

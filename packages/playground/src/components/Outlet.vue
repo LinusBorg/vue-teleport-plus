@@ -11,8 +11,8 @@ const toggle = () => (show.value = !show.value)
     {{ show ? 'Deactivate' : 'Activate' }} Outlet
   </button>
   <h2>
-    Bewlow this line is the TeleportOutlet that should show out teleported
-    content
+    Below this line is the TeleportOutlet that should show out teleported
+    content when the Source is active.
   </h2>
   <TeleportOutlet v-if="show" name="myOutlet" />
 </template>
