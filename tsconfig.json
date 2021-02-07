@@ -2,6 +2,7 @@
   "compilerOptions": {
     "baseUrl": "./",
     "module": "esnext",
+    "target": "ES2019",
     "lib": ["dom", "esnext"],
     "importHelpers": true,
     "declaration": true,
@@ -17,7 +18,8 @@
     "types": ["vite/client", "jest"],
     "paths": {
       "@linusborg/vue-teleport-plus": ["./packages/teleport-plus/src/index.ts"]
-    }
+    },
+    "plugins": [{ "name": "@vuedx/typescript-plugin-vue" }],
   },
   "include": [
     "/**/src/**/*.ts",
