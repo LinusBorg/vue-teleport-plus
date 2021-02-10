@@ -24,6 +24,12 @@ export default <UserConfig>{
     rollupOptions: {
       external: ['vue'],
       output: {
+        banner: `
+        /**
+         *  Copyright ${new Date(Date.now()).getFullYear()} Thorsten Luenborg 
+         *  @license MIT
+        **/
+        `,
         exports: 'named',
         globals: {
           vue: 'Vue',
