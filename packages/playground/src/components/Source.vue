@@ -8,7 +8,7 @@ const toggle = () => (disabled.value = !disabled.value)
 </script>
 
 <template>
-  <h1>This is where we send content from</h1>
+  <h1 data-test="source-h1">This is where we send content from</h1>
   <button @click="toggle" class="border-green-400 border-2 rounded px-3 py-2">
     {{ disabled ? 'Activate' : 'Deactivate' }}
     Source
