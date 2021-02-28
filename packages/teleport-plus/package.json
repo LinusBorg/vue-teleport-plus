@@ -7,8 +7,16 @@
   "homepage": "",
   "license": "MIT",
   "type": "module",
-  "main": "dist/es5/vue-monorepo-lib.umd.js",
-  "module": "dist/vue-monorepo-lib.es.js",
+  "main": "dist/es5/vue-teleport-plus.umd.js",
+  "module": "dist/vue-teleport-plus.es.js",
+  "unpkg": "dist/es5/vue-teleport-plus.umd.js",
+  "jsdelivr": "dist/es5/vue-teleport-plus.umd.js",
+  "exports": {
+    ".": {
+      "require": "./dist/vue-teleport-plus.umd.js",
+      "import": "./dist/vue-teleport-plus.es.js"
+    }
+  },
   "typings": "dist/index.d.ts",
   "files": [
     "dist",
@@ -29,6 +37,12 @@
     "vue": "^3.0.5"
   },
   "peerDependencies": {
+    "vue": ">=3.0.0"
+  },
+  "peerDependenciesMeta": {
+    "vue": { "optional": true }
+  },
+  "devDependencies": {
     "vue": "^3.0.5"
   }
 }

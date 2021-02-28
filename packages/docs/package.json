@@ -22,6 +22,6 @@
     "@linusborg/vue-teleport-plus": "*"
   },
   "devDependencies": {
-    "vitepress": "^0.11.4"
+    "vitepress": "^0.12.0"
   }
 }

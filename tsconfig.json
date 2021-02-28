@@ -5,6 +5,13 @@
     "target": "ES2019",
     "lib": ["dom", "esnext"],
     "importHelpers": true,
+
+    // trying to get auto `import type` insertion for type imports
+    // doesn't work so far: https://github.com/microsoft/TypeScript/pull/36412#issuecomment-707221008
+    "isolatedModules": true,
+    "importsNotUsedAsValues": "error",
+    //
+    
     "declaration": true,
     "sourceMap": true,   
     "strict": true,
@@ -15,11 +22,11 @@
     "moduleResolution": "node",
     "jsx": "preserve",
     "esModuleInterop": true,
-    "types": ["vite/client", "jest"],
+    "types": ["vite/client", "jest", "cypress", "@testing-library/cypress"],
     "paths": {
       "@linusborg/vue-teleport-plus": ["./packages/teleport-plus/src/index.ts"]
     },
-    "plugins": [{ "name": "@vuedx/typescript-plugin-vue" }],
+    // "plugins": [{ "name": "@vuedx/typescript-plugin-vue" }],
   },
   "include": [
     "/**/src/**/*.ts",
