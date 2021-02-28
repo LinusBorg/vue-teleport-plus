@@ -1,4 +1,4 @@
-import { App } from 'vue'
+import type { App } from 'vue'
 import { createCoordinator, coordinatorKey, Coordinator } from './coordinator'
 import TeleportOutlet from './TeleportOutlet.vue'
 import TeleportSource from './TeleportSource.vue'
@@ -21,6 +21,7 @@ export function install(app: App, options: PluginOptions = {}) {
     coordinator: _coordinator,
   } = Object.assign({}, defaultOptions, options)
 
+  // TODO: skip in node env
   addFallbackTargetElement()
 
   const coordinator = _coordinator ?? createCoordinator()
