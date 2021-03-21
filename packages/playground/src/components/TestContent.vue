@@ -11,4 +11,5 @@ onUnmounted(() => {
 
 <template>
   <p>This is a component with test content</p>
+  <button>Test</button>
 </template>

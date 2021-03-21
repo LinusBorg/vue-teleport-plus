@@ -15,7 +15,8 @@
     ".": {
       "require": "./dist/vue-teleport-plus.umd.js",
       "import": "./dist/vue-teleport-plus.es.js"
-    }
+    },
+    "./": "./"
   },
   "typings": "dist/index.d.ts",
   "files": [

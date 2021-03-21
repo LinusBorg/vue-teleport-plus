@@ -8,12 +8,10 @@
   },
   "dependencies": {
     "@linusborg/vue-teleport-plus": "*",
-    "@tailwindcss/postcss7-compat": "npm:@tailwindcss/postcss7-compat",
-    "autoprefixer": "^9",
-    "postcss": "^7",
     "vue": "^3.0.5"
   },
   "devDependencies": {
-    "tailwindcss": "npm:@tailwindcss/postcss7-compat"
+    "vite": "^2.0.5",
+    "vite-plugin-windicss": "^0.7.1"
   }
 }

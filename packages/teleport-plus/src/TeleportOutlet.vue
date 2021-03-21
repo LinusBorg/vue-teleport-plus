@@ -1,7 +1,7 @@
-<script setup lang="ts">
+<script lang="ts">
 import {
   computed,
-  defineProps,
+  defineComponent,
   nextTick,
   onBeforeUnmount,
   onMounted,
@@ -9,45 +9,53 @@ import {
 } from 'vue'
 import { injectCoordinator } from './coordinator'
 import { stableSort } from './stableSort'
-const props = defineProps({
-  name: {
-    type: String,
-    required: true,
-  },
-  tag: {
-    type: String,
-    default: 'DIV',
-  },
-})
 
-const coordinator = injectCoordinator()
-const targets = computed(() => {
-  const state = coordinator.outletTargets[props.name] ?? {}
-  const targets = Object.keys(state)
-  return stableSort(
-    targets,
-    (a: string, b: string) => state[a].order - state[b].order
-  )
-})
+export default defineComponent({
+  props: {
+    name: {
+      type: String,
+      required: true,
+    },
+    tag: {
+      type: String,
+      default: 'DIV',
+    },
+  },
+  setup(props) {
+    const coordinator = injectCoordinator()
+    const targets = computed(() => {
+      const state = coordinator.outletTargets[props.name] ?? {}
+      const targets = Object.keys(state)
+      return stableSort(
+        targets,
+        (a: string, b: string) => state[a].order - state[b].order
+      )
+    })
 
-onMounted(async () => {
-  await nextTick()
-  targets.value.forEach((t) => coordinator.activateTarget(props.name, t))
-})
-onUpdated(async () => {
-  await nextTick()
-  targets.value.forEach((t) => coordinator.activateTarget(props.name, t))
-})
-onBeforeUnmount(() => {
-  // signal to sources to unmount their teleports
-  // I doubt that we can do this in a synchronous way though,
-  // so it will likely require additional hacks? at least when leave transitions are involved
-  // targets.value.map(t => coordinator.deactivateTarget(t))
-  console.log('unmounting')
-  targets.value.forEach((t) => {
-    coordinator.deactivateTarget(props.name, t)
-    coordinator.bus.emit(t)
-  })
+    onMounted(async () => {
+      await nextTick()
+      targets.value.forEach((t) => coordinator.activateTarget(props.name, t))
+    })
+    onUpdated(async () => {
+      await nextTick()
+      targets.value.forEach((t) => coordinator.activateTarget(props.name, t))
+    })
+    onBeforeUnmount(() => {
+      // signal to sources to unmount their teleports
+      // I doubt that we can do this in a synchronous way though,
+      // so it will likely require additional hacks? at least when leave transitions are involved
+      // targets.value.map(t => coordinator.deactivateTarget(t))
+      console.log('unmounting')
+      targets.value.forEach((t) => {
+        coordinator.deactivateTarget(props.name, t)
+        coordinator.bus.emit(t)
+      })
+    })
+
+    return {
+      targets,
+    }
+  },
 })
 </script>
 <template>
