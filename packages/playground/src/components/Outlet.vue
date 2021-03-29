@@ -19,13 +19,14 @@ export default defineComponent({
 </script>
 
 <template>
+  <h3 class="text-xl font-bold mb-3">Outlet</h3>
   <Button @click="toggle">
     {{ show ? 'Deactivate' : 'Activate' }} Outlet
   </Button>
-  <h2>
+  <p class="mt-1 mb-2">
     Below this line is the TeleportOutlet that should show out teleported
     content when the Source is active.
-  </h2>
+  </p>
   <hr class="my-3" />
   <TeleportOutlet v-if="show" name="myOutlet" />
 </template>
