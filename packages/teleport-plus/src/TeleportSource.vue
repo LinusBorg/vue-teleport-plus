@@ -40,7 +40,7 @@ export default defineComponent({
     },
     name: {
       type: String,
-      default: 'teleport-source' + Math.round(Math.random() * 100000),
+      default: () => 'teleport-source' + Math.round(Math.random() * 100000),
     },
     to: {
       type: String,
