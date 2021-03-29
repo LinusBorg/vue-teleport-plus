@@ -2,6 +2,9 @@
 
 > Giving super powers to Vue 3's `<teleport>` component
 
+# WARING: UNPUBLISHED, EXPERIMENTAL !!
+
+I'm still working on this, it's rough around the edges and likely doesn't work for the most part.
 ## What problem does this library solve?
 
 ## Installation
