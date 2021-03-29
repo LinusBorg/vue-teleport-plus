@@ -1,18 +1,31 @@
-<script setup lang="ts">
+<script lang="ts">
 import { TeleportOutlet } from '@linusborg/vue-teleport-plus'
-import { ref } from 'vue'
+import { defineComponent, ref } from 'vue'
 
-const show = ref(true)
-const toggle = () => (show.value = !show.value)
+export default defineComponent({
+  components: {
+    TeleportOutlet,
+  },
+  setup() {
+    const show = ref(true)
+    const toggle = () => (show.value = !show.value)
+
+    return {
+      show,
+      toggle,
+    }
+  },
+})
 </script>
 
 <template>
-  <button @click="toggle" class="border-green-400 border-2 rounded px-3 py-2">
+  <Button @click="toggle">
     {{ show ? 'Deactivate' : 'Activate' }} Outlet
-  </button>
+  </Button>
   <h2>
     Below this line is the TeleportOutlet that should show out teleported
     content when the Source is active.
   </h2>
+  <hr class="my-3" />
   <TeleportOutlet v-if="show" name="myOutlet" />
 </template>
