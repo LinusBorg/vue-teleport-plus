@@ -1,15 +1,13 @@
-<script lang="ts" setup>
+<script lang="ts">
 import {
   computed,
-  defineProps,
   getCurrentInstance,
   nextTick,
   onUnmounted,
-  defineEmit,
   watch,
   // hack for : https://github.com/vuejs/vue-next/issues/2855
   Teleport as teleport_,
-  onUpdated,
+  defineComponent,
   // hack end
 } from 'vue'
 import type { TeleportProps, VNodeProps } from 'vue'
@@ -22,79 +20,85 @@ const Teleport = teleport_ as {
   }
 }
 
-const props = defineProps({
-  disabled: {
-    type: Boolean,
-  },
-  name: {
-    type: String,
-    default: 'teleport-source' + Math.round(Math.random() * 100000),
-  },
-  to: {
-    type: String,
-    required: true,
-  },
-  order: {
-    type: Number,
-    default: Infinity,
-  },
-})
-const emit = defineEmit(['outletMounted'])
-
-const vm = getCurrentInstance()
-console.log('vm', vm)
-const update = () => {
-  console.log('forcing update as outlet unmounts')
-  vm?.update()
+function useBus(name: string) {
+  const vm = getCurrentInstance()
+  const coordinator = injectCoordinator()
+  const update = () => {
+    // force update synchronously so we can hopefully unmount the portal content
+    // before the outlet removes the DOM elements
+    // TODO: hack together something to make it work with Transitions?
+    vm?.update()
+  }
+  coordinator.bus.on(name, update)
+  onUnmounted(() => coordinator.bus.off(name, update))
 }
 
-const coordinator = injectCoordinator()
-coordinator.addTargetToOutlet(props.to, props.name, props.order)
-// when the Outlet unmounts, we get a synchronous event emitted
-// which we can use to directly update the Source
-// this - hopefully - will allow the teleport to unmount from the target properly
-// if that doesn't work, we need to find other workarounds.
-coordinator.bus.on(props.name, update)
-const isTargetActive = computed(() => {
-  const target = coordinator.outletTargets[props.to]?.[props.name]
-  return !!target?.active
-})
+export default defineComponent({
+  props: {
+    disabled: {
+      type: Boolean,
+    },
+    name: {
+      type: String,
+      default: 'teleport-source' + Math.round(Math.random() * 100000),
+    },
+    to: {
+      type: String,
+      required: true,
+    },
+    order: {
+      type: Number,
+      default: Infinity,
+    },
+  },
+  emits: ['outletMounted'],
+  components: {
+    Teleport,
+  },
+  setup(props, { emit }) {
+    const coordinator = injectCoordinator()
+    coordinator.addTargetToOutlet(props.to, props.name, props.order)
+    useBus(props.name)
 
-const selector = computed(() =>
-  isTargetActive.value && !props.disabled
-    ? `[data-teleport-plus="${props.name}"]`
-    : '[data-teleport-plus-fallback-target]'
-)
+    const isTargetActive = computed(() => {
+      const target = coordinator.outletTargets[props.to]?.[props.name]
+      return !!target?.active
+    })
 
-watch(
-  () => isTargetActive.value,
-  (value) => {
-    console.log('Source emitting `outletMounted`')
-    emit('outletMounted', value)
-  }
-)
+    const selector = computed(() =>
+      isTargetActive.value && !props.disabled
+        ? `[data-teleport-plus="${props.name}"]`
+        : // hack to satify Teleport's need for an existing target element even when disabled
+          '[data-teleport-plus-fallback-target]'
+    )
 
-onUpdated(() => {
-  console.log(vm)
-})
+    watch(
+      () => isTargetActive.value,
+      (value) => {
+        emit('outletMounted', value)
+      }
+    )
 
-onUnmounted(async () => {
-  const { to, name } = props
-  coordinator.bus.off(name, update)
-  await nextTick()
-  coordinator.removeTargetFromOutlet(to, name)
+    onUnmounted(async () => {
+      const { to, name } = props
+      await nextTick()
+      coordinator.removeTargetFromOutlet(to, name)
+    })
+
+    return {
+      isTargetActive,
+      selector,
+    }
+  },
 })
 </script>
 
 <template>
-  <p>disabled: {{ props.disabled }}</p>
-  <p>isTargetActive: {{ isTargetActive }}</p>
-  <h2>Below this headline is the teleport component.</h2>
   <component
-    :is="Teleport"
+    :is="'Teleport'"
     v-if="isTargetActive || disabled"
     :to="selector"
-    :disabled="props.disabled"
+    :disabled="disabled"
   >
     <slot></slot>
   </component>
