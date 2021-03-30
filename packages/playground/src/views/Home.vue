@@ -6,5 +6,9 @@
     <DemoCard title="Multiple Sources" to="/multiple">
       Teleporting content from multiple sources to the same outlet.
     </DemoCard>
+    <DemoCard title="Customizing Outlet Elements" to="/custom-outlet">
+      Teleports need a wrapper element to mount into. The elements created by
+      TeleportOutlet can be customized through a tag prop and a wrapper slot.
+    </DemoCard>
   </div>
 </template>

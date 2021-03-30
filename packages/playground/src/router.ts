@@ -1,7 +1,7 @@
-import { h } from '@vue/runtime-core'
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 import SingleTeleport from './views/SingleTeleport.vue'
 import MultipleSources from './views/MultipleSources.vue'
+import CustomOutlet from './views/CustomOutlet.vue'
 import Home from './views/Home.vue'
 
 export const routes: RouteRecordRaw[] = [
@@ -28,6 +28,14 @@ export const routes: RouteRecordRaw[] = [
       title: 'Multiple Sources, one Outlet',
     },
     component: MultipleSources,
+  },
+  {
+    path: '/custom-outlet',
+    name: 'customOutlet',
+    meta: {
+      title: 'Customizing Outlet Elements',
+    },
+    component: CustomOutlet,
   },
 ]
 

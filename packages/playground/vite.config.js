@@ -4,7 +4,6 @@ import WindiCSS from 'vite-plugin-windicss'
  * @type { import('vite').UserConfig }
  */
 export default {
-  resolve: {},
   plugins: [vue(), WindiCSS()],
   resolve: {
     alias: {
