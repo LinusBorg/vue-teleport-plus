@@ -57,7 +57,12 @@ export default defineComponent({
 </script>
 <template>
   <template v-if="$slots.wrapper">
-    <slot name="wrapper" v-for="id in targets" :id="id" />
+    <slot
+      name="wrapper"
+      v-for="id in targets"
+      :data-teleport-plus="id"
+      :key="id"
+    />
   </template>
   <template v-else>
     <component

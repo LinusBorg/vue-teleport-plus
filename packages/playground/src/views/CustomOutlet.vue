@@ -38,8 +38,8 @@ export default defineComponent({
       </p>
       <ul class="list-disc list-inside">
         <TeleportOutlet name="custom-outlet-wrapper">
-          <template #wrapper="{ id }">
-            <li :data-teleport-plus="id" class=""></li>
+          <template #wrapper="props">
+            <li v-bind="props" class=""></li>
           </template>
         </TeleportOutlet>
       </ul>
