@@ -2,7 +2,6 @@ import { UserConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import ts from 'rollup-plugin-typescript2'
 
-import path from 'path'
 export default <UserConfig>{
   plugins: [
     vue(),
