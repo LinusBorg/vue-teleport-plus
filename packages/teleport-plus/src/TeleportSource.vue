@@ -7,8 +7,8 @@ import {
   watch,
   // hack for : https://github.com/vuejs/vue-next/issues/2855
   Teleport as teleport_,
-  defineComponent,
   // hack end
+  defineComponent,
 } from 'vue'
 import type { TeleportProps, VNodeProps } from 'vue'
 import { injectCoordinator } from './coordinator'
@@ -55,14 +55,28 @@ export default defineComponent({
   components: {
     Teleport,
   },
-  setup(props, { emit }) {
+  setup(props) {
     const coordinator = injectCoordinator()
-    coordinator.addTargetToOutlet(props.to, props.name, props.order)
+
+    coordinator.addConnection(props.to, props.name, props.order)
+    onUnmounted(async () => {
+      const { to, name } = props
+      await nextTick()
+      coordinator.removeConnection(to, name)
+    })
+
+    watch(
+      () => props.disabled,
+      (value) => coordinator.switchEnabledState(props.to, props.name, !value),
+      { flush: 'sync' }
+    )
+
+    // TODO: can this be replaced with a sync/pre watcher?
     useBus(props.name)
 
     const isTargetActive = computed(() => {
       const target = coordinator.outletTargets[props.to]?.[props.name]
-      return !!target?.active
+      return !!target?.mounted && !!target?.enabled
     })
 
     const selector = computed(() =>
@@ -71,19 +85,6 @@ export default defineComponent({
         : // hack to satify Teleport's need for an existing target element even when disabled
           '[data-teleport-plus-fallback-target]'
     )
-
-    watch(
-      () => isTargetActive.value,
-      (value) => {
-        emit('outletMounted', value)
-      }
-    )
-
-    onUnmounted(async () => {
-      const { to, name } = props
-      await nextTick()
-      coordinator.removeTargetFromOutlet(to, name)
-    })
 
     return {
       isTargetActive,

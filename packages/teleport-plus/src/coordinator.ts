@@ -3,8 +3,11 @@ import mitt from 'mitt'
 
 interface OutletTargets {
   [outlet: string]: {
-    [targetElementId: string]: {
-      active: boolean
+    [source: string]: {
+      source: string
+      enabled: boolean
+      outlet: string
+      mounted: boolean
       order: number
     }
   }
@@ -16,44 +19,57 @@ export function createCoordinator() {
   /**
    * Called by a TeleportSource to communicate the target Element ID to which it intends to teleport.
    */
-  function addTargetToOutlet(
+  function addConnection(
     outlet: string,
-    targetElementId: string,
+    source: string,
     order: number = Infinity
   ) {
     const outletState = outletTargets[outlet] ?? (outletTargets[outlet] = {})
-    outletState[targetElementId] = {
-      active: false,
+    outletState[source] = {
+      outlet,
+      source,
+      enabled: true,
+      mounted: false,
       order,
     }
   }
-  function removeTargetFromOutlet(outlet: string, targetElementId: string) {
+  function removeConnection(outlet: string, source: string) {
     const outletState = outletTargets[outlet]
     if (outletState) {
-      delete outletState[targetElementId]
+      delete outletState[source]
     }
   }
-  function activateTarget(outlet: string, targetElementId: string) {
-    const target = outletTargets[outlet]?.[targetElementId]
+  function switchEnabledState(
+    outlet: string,
+    source: string,
+    enabled: boolean
+  ) {
+    const target = outletTargets[outlet]?.[source]
     if (target) {
-      target.active = true
+      target.enabled = enabled
     }
   }
-  function deactivateTarget(outlet: string, targetElementId: string) {
-    const target = outletTargets[outlet]?.[targetElementId]
+
+  function switchMountedState(
+    outlet: string,
+    source: string,
+    mounted: boolean
+  ) {
+    const target = outletTargets[outlet]?.[source]
     if (target) {
-      target.active = false
+      target.mounted = mounted
     }
+    if (mounted) bus.emit(target.source)
   }
 
   return {
     outletTargets: readonly(outletTargets),
     // to be used by TeleportSource
-    addTargetToOutlet,
-    removeTargetFromOutlet,
+    addConnection,
+    removeConnection,
     // to be used by TeleportOutlet
-    activateTarget,
-    deactivateTarget,
+    switchEnabledState,
+    switchMountedState,
     bus,
   }
 }

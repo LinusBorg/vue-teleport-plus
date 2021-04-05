@@ -1,4 +1,4 @@
-import type { App } from 'vue'
+import { App, toRaw, watch } from 'vue'
 import { createCoordinator, coordinatorKey, Coordinator } from './coordinator'
 import TeleportOutlet from './TeleportOutlet.vue'
 import TeleportSource from './TeleportSource.vue'
@@ -25,6 +25,8 @@ export function install(app: App, options: PluginOptions = {}) {
   addFallbackTargetElement()
 
   const coordinator = _coordinator ?? createCoordinator()
+
+  watch(coordinator.outletTargets, (c) => console.log(toRaw(c)), { deep: true })
 
   teleportSource && app.component(teleportSource, TeleportSource)
   teleportOutlet && app.component(teleportOutlet, TeleportOutlet)
