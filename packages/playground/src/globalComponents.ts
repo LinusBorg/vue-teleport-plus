@@ -1,4 +1,4 @@
-import type { App } from '@vue/runtime-core'
+import type { App } from 'vue'
 import Button from './components/Button.vue'
 import DemoWrapper from './components/DemoWrapper.vue'
 import DemoCard from './components/DemoCard.vue'
