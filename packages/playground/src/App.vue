@@ -10,15 +10,20 @@
       </h1>
       <router-view />
     </div>
+    <div>
+      <Test icon="home"></Test>
+    </div>
   </div>
 </template>
 
 <script lang="ts">
 import Navigation from './components/Navigation.vue'
+import Test from './components/Test.vue'
 export default {
   name: 'App',
   components: {
     Navigation,
+    Test,
   },
 }
 </script>

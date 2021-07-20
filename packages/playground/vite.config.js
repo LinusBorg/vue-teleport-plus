@@ -13,12 +13,6 @@ export default {
     dedupe: ['vue'],
   },
   optimizeDeps: {
-    exclude: [
-      '@linusborg/vue-teleport-plus',
-      'postcss',
-      'autoprefixer',
-      '@tailwindcss/postcss7-compat',
-    ],
-    link: ['@linusborg/vue-teleport-plus'],
+    exclude: ['@linusborg/vue-teleport-plus'],
   },
 }
