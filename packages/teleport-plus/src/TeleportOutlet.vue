@@ -22,14 +22,12 @@ export default defineComponent({
   },
   setup(props) {
     const coordinator = injectCoordinator()
+    const state = computed(() => coordinator.outletTargets[props.name] ?? {})
     const targets = computed(() => {
-      const state = coordinator.outletTargets[props.name] ?? {}
-      const targets = Object.entries(state)
-        .filter(([_, entry]) => entry.enabled)
-        .map(([name]) => name)
+      const targets = Object.entries(state.value).map(([name]) => name)
       return stableSort(
         targets,
-        (a: string, b: string) => state[a].order - state[b].order
+        (a: string, b: string) => state.value[a].order - state.value[b].order
       )
     })
 
@@ -58,6 +56,7 @@ export default defineComponent({
       targets,
       onMountedHandler,
       onUnmountedHandler,
+      state,
     }
   },
 })
@@ -67,6 +66,7 @@ export default defineComponent({
     <slot
       name="wrapper"
       v-for="id in targets"
+      :enabled="state[id].enabled"
       :data-teleport-plus="id"
       :key="id"
       :onVnodeMounted="() => onMountedHandler(id)"
@@ -76,6 +76,7 @@ export default defineComponent({
   <template v-else>
     <component
       v-for="id in targets"
+      v-show="state[id].enabled"
       :is="tag"
       :key="id"
       :data-teleport-plus="id"
