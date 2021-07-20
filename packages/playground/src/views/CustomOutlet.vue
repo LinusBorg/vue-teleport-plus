@@ -41,6 +41,7 @@ export default defineComponent({
           <template #wrapper="props">
             <li
               v-bind="props"
+              v-show="props.enabled"
               :data-teleport-plus="props.dataTeleportPlus"
               class=""
             ></li>
