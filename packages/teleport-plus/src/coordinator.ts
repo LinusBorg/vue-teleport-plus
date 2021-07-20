@@ -2,12 +2,14 @@ import { inject, InjectionKey, provide, reactive, readonly } from 'vue'
 import mitt from 'mitt'
 
 interface OutletTargets {
+  // equals "to" prop of TeleportSource, "name" of TeleportOutlet
   [outlet: string]: {
+    // equals "name" prop of TeleportSource
     [source: string]: {
       source: string
-      enabled: boolean
+      enabled: boolean // is Source enabled?
       outlet: string
-      mounted: boolean
+      mounted: boolean // is outlet mounted?
       order: number
     }
   }
@@ -59,7 +61,11 @@ export function createCoordinator() {
     if (target) {
       target.mounted = mounted
     }
-    if (mounted) bus.emit(target.source)
+    // when oulet is being unmounted by its parent,
+    // we have to make source update synchronously
+    // so Source can unmount its portal contents
+    // we use an eventbus signal for this.
+    if (!mounted) bus.emit(target.source)
   }
 
   return {
@@ -67,10 +73,10 @@ export function createCoordinator() {
     // to be used by TeleportSource
     addConnection,
     removeConnection,
-    // to be used by TeleportOutlet
     switchEnabledState,
-    switchMountedState,
     bus,
+    // to be used by TeleportOutlet
+    switchMountedState,
   }
 }
 
