@@ -34,7 +34,7 @@
     "test:w": "jest --config ../../jest.config.ts --watch --runInBand"
   },
   "dependencies": {
-    "mitt": "^2.1.0",
+    "mitt": "^3.0.0",
     "vue": "^3.0.5"
   },
   "peerDependencies": {
