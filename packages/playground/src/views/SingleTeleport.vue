@@ -14,7 +14,7 @@ import Source from './SingleTeleport/Source.vue'
 import Outlet from './SingleTeleport/Outlet.vue'
 
 export default {
-  name: 'App',
+  name: 'SingleTeleport',
   components: {
     Source,
     Outlet,
