@@ -48,8 +48,10 @@ export default defineComponent({
     const onMountedHandler = (t: string) => {
       coordinator.switchMountedState(props.name, t, true)
     }
-    const onUnmountedHandler = (t: string) => {
-      coordinator.switchMountedState(props.name, t, false)
+    const onUnmountedHandler = (source: string) => {
+      if (state.value[source].mounted) {
+        coordinator.switchMountedState(props.name, source, false)
+      }
     }
 
     return {
