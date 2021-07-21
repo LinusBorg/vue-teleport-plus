@@ -19,7 +19,7 @@ export default <UserConfig>{
       entry: 'src/index.ts',
       name: 'VueTeleportPlus',
     },
-    minify: false,
+    minify: !process.env.BUILD_MINIFY,
     rollupOptions: {
       external: ['vue'],
       output: {
