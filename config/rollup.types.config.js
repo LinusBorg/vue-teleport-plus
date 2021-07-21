@@ -1,8 +1,6 @@
 import dts from 'rollup-plugin-dts'
 //import commonjs from '@rollup/plugin-commonjs'
 
-const cwd = process.cwd()
-
 /**
  * @type [import('rollup').RollupOptions]
  */
