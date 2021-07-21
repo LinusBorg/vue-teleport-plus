@@ -11,7 +11,7 @@
   "scripts": {
     "start": "lerna run start --stream --parallel --scope '@linusborg/*'",
     "test": "lerna run test --stream --scope '@linusborg/*'  --",
-    "test:ci": "lerna run test:ci --stream --scope '@linusborg/*'  --",
+    "test:ci": "lerna run test:ci --stream --scope '@linusborg/*'  -- --ci --coverage --maxWorkers=2",
     "lint": "lerna run lint -- --fix",
     "build": "lerna run build --scope '@linusborg/*'",
     "play": "cd packages/playground && yarn start",
