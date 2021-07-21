@@ -2,6 +2,7 @@ import type { Config } from '@jest/types'
 const config: Config.InitialOptions = {
   rootDir: process.cwd(),
   preset: 'ts-jest',
+  coverageDirectory: './coverage',
   testEnvironment: 'jsdom',
   transform: {
     '^.+\\.vue$': 'vue3-jest',

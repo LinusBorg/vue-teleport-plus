@@ -31,6 +31,7 @@
     "typecheck:watch": "vue-tsc src --noEmit --watch",
     "lint": "eslint 'src/**/*.{ts,vue}'",
     "test": "jest --config ../../jest.config.ts --runInBand",
+    "test:ci": "jest --config ../../jest.config.ts",
     "test:w": "jest --config ../../jest.config.ts --watch --runInBand"
   },
   "dependencies": {
