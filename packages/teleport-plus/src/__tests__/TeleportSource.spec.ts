@@ -8,11 +8,11 @@ const mountSource = (
   globals: Record<string, any> = {}
 ) => {
   const coordinator = createCoordinator()
-  const wrapper = mount((TeleportSource as unknown) as any, {
+  const wrapper = mount(TeleportSource as unknown as any, {
     ...options,
     global: {
       provide: {
-        [(coordinatorKey as unknown) as string]: coordinator,
+        [coordinatorKey as unknown as string]: coordinator,
       },
       ...globals,
     },
@@ -21,11 +21,24 @@ const mountSource = (
   return { wrapper, coordinator }
 }
 describe('TeleportSource', () => {
-  test('mounts', () => {
-    const { wrapper } = mountSource({
+  test('adds Connection with generated name', async () => {
+    const { wrapper, coordinator } = mountSource({
       props: { to: 'outlet' },
     })
+    await nextTick()
     expect(wrapper.exists()).toBe(true)
+    const name: string = wrapper.props().name
+    expect(coordinator.outletTargets.outlet[name].enabled).toBe(true)
+    expect(wrapper.html()).toBe('<!--v-if-->')
+  })
+
+  test('adds Connection with custom name', async () => {
+    const { wrapper, coordinator } = mountSource({
+      props: { to: 'outlet', name: 'source1' },
+    })
+    await nextTick()
+    expect(wrapper.exists()).toBe(true)
+    expect(coordinator.outletTargets.outlet.source1.enabled).toBe(true)
   })
 
   test('disabled shows content locally', async () => {
@@ -40,10 +53,11 @@ describe('TeleportSource', () => {
       },
     })
 
-    coordinator.activateTarget('outlet', 'source1')
+    coordinator.switchMountedState('outlet', 'source1', true)
 
     await nextTick()
 
     expect(wrapper.exists()).toBe(true)
+    expect(wrapper.get('p').text()).toBe('Test')
   })
 })

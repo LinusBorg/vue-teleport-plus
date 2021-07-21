@@ -28,9 +28,9 @@ export function createCoordinator() {
   ) {
     const outletState = outletTargets[outlet] ?? (outletTargets[outlet] = {})
     outletState[source] = {
-      outlet,
       source,
       enabled: true,
+      outlet,
       mounted: false,
       order,
     }

@@ -9953,7 +9953,7 @@ vscode-uri@^3.0.2:
   resolved "https://registry.yarnpkg.com/vscode-uri/-/vscode-uri-3.0.2.tgz#ecfd1d066cb8ef4c3a208decdbab9a8c23d055d0"
   integrity sha512-jkjy6pjU1fxUvI51P+gCsxg1u2n8LSt0W6KrCNQceaziKzff74GoWmjVG46KieVzybO1sttPQmYfrwSHey7GUA==
 
-vscode-vue-languageservice@^0.26.5:
+vscode-vue-languageservice@^0.26.0, vscode-vue-languageservice@^0.26.5:
   version "0.26.5"
   resolved "https://registry.yarnpkg.com/vscode-vue-languageservice/-/vscode-vue-languageservice-0.26.5.tgz#5f1e9d20ab7762f05f9b1f45d5972e8c5f6284a5"
   integrity sha512-1vMUbSzLf/MrgrEZdZMCYQK5al4Qq39WXGNHblUF2AwDvgFOLdbbT16X8tvzuME2SOMg3x/3nLzJtutZpsC1GQ==
@@ -9991,10 +9991,24 @@ vue-eslint-parser@^7.6.0:
     esquery "^1.4.0"
     lodash "^4.17.15"
 
-vue-jest@^5.0.0-alpha.7:
-  version "5.0.0-alpha.10"
-  resolved "https://registry.yarnpkg.com/vue-jest/-/vue-jest-5.0.0-alpha.10.tgz#4326977b3b0268b1def140f3b69113c2d82fb090"
-  integrity sha512-iN62cTi4AL0UsgxEyVeJtHG6qXEv+8Ci2wX1vP3b/dAZvyBRmqy5aJHQrP6VCEuio+HgHQ1LAZ+ccM2pouBmlg==
+vue-router@^4.0.5:
+  version "4.0.10"
+  resolved "https://registry.yarnpkg.com/vue-router/-/vue-router-4.0.10.tgz#ec8fda032949b2a31d3273170f8f376e86eb52ac"
+  integrity sha512-YbPf6QnZpyyWfnk7CUt2Bme+vo7TLfg1nGZNkvYqKYh4vLaFw6Gn8bPGdmt5m4qrGnKoXLqc4htAsd3dIukICA==
+  dependencies:
+    "@vue/devtools-api" "^6.0.0-beta.14"
+
+vue-tsc@^0.2.1:
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/vue-tsc/-/vue-tsc-0.2.1.tgz#81a5919472e60de096e71fe5568debe1f6f28687"
+  integrity sha512-iyxQ+MQw4dE8GWgB63qC0URAb/UUAMbt4F+3LEtz+0bioo3+g6pi0IIbYNNE7OWDo/SJsyMJnFCJNwQ3DWJOOg==
+  dependencies:
+    vscode-vue-languageservice "^0.26.0"
+
+vue3-jest@^27.0.0-alpha.2:
+  version "27.0.0-alpha.2"
+  resolved "https://registry.yarnpkg.com/vue3-jest/-/vue3-jest-27.0.0-alpha.2.tgz#c9935bcf8146443265d16e71b8ee8d3d313e1478"
+  integrity sha512-1UkRp+DLFWZQ6fFRQe4T3jpY/Rd+6zjwuLlnMNTbP8PgDrcykSS8aZaYZqFhNG6ECZ6qmV1F2jXcg9lMGRzLuw==
   dependencies:
     "@babel/plugin-transform-modules-commonjs" "^7.2.0"
     chalk "^2.1.0"
@@ -10002,13 +10016,6 @@ vue-jest@^5.0.0-alpha.7:
     extract-from-css "^0.4.4"
     source-map "0.5.6"
     tsconfig "^7.0.0"
-
-vue-router@^4.0.5:
-  version "4.0.10"
-  resolved "https://registry.yarnpkg.com/vue-router/-/vue-router-4.0.10.tgz#ec8fda032949b2a31d3273170f8f376e86eb52ac"
-  integrity sha512-YbPf6QnZpyyWfnk7CUt2Bme+vo7TLfg1nGZNkvYqKYh4vLaFw6Gn8bPGdmt5m4qrGnKoXLqc4htAsd3dIukICA==
-  dependencies:
-    "@vue/devtools-api" "^6.0.0-beta.14"
 
 vue@^3.0.5, vue@^3.1.1:
   version "3.1.5"
