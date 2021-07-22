@@ -20,8 +20,8 @@ export default defineComponent({
 </script>
 
 <template>
-  <div class="border border-gray-300 m-1 p-2">
+  <div class="border border-gray-300 m-1 p-2" data-test-content>
     <p class="mt-2 mb-2">This is a component with test content</p>
-    <Button @click="count++">Count ({{ count }})</Button>
+    <Button @click="count++" data-test-btn="count">Count ({{ count }})</Button>
   </div>
 </template>

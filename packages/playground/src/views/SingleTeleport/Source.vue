@@ -22,15 +22,17 @@ export default defineComponent({
 </script>
 
 <template>
-  <h3 class="text-xl font-bold" data-test="source-h1">Source</h3>
+  <h3 class="text-xl font-bold">Source</h3>
   <p class="mb-2 mt-1">This is where content comes from</p>
-  <Button @click="toggle">
+  <Button @click="toggle" data-test-btn="toggle">
     {{ disabled ? 'Activate' : 'Deactivate' }}
     Source
   </Button>
   <hr class="my-3" />
-  <TeleportSource to="myOutlet" :disabled="disabled">
-    <p class="mt-1 mb-2">This is our content we want to teleport:</p>
-    <TestContent />
-  </TeleportSource>
+  <div data-test="source1">
+    <TeleportSource to="myOutlet" :disabled="disabled">
+      <p class="mt-1 mb-2">This is our content we want to teleport:</p>
+      <TestContent />
+    </TeleportSource>
+  </div>
 </template>
