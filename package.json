@@ -19,7 +19,7 @@
     "cypress:open": "cypress open --config-file cypress/cypress.json"
   },
   "devDependencies": {
-    "@linusborg/eslint-config": "^0.1.0",
+    "@linusborg/eslint-config": "^0.1.1",
     "@testing-library/cypress": "^8.0.0",
     "@types/jest": "^26.0.20",
     "@vitejs/plugin-vue": "^1.0.4",
