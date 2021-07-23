@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "start": "vite",
-    "build": "vite build"
+    "build": "vite build",
+    "lint": "eslint 'src/**/*.{ts,vue}'"
   },
   "dependencies": {
     "@linusborg/vue-teleport-plus": "*",
