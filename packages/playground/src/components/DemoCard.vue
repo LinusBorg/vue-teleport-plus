@@ -22,7 +22,16 @@ export default defineComponent({
       <slot />
     </p>
     <router-link
-      class="mb-4 text-blue-500 font-bold underline hover:-translate-y-0.5 transform transition inline-block"
+      class="
+        mb-4
+        text-blue-500
+        font-bold
+        underline
+        hover:-translate-y-0.5
+        transform
+        transition
+        inline-block
+      "
       :to="to"
     >
       Check out

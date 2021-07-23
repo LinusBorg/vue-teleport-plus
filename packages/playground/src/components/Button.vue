@@ -5,5 +5,3 @@
     <slot />
   </button>
 </template>
-
-<script lang="ts"></script>
