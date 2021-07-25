@@ -62,6 +62,7 @@ export default defineComponent({
   <div class="grid grid-cols-1 gap-3">
     <TeleportSource
       to="outlet-multiple"
+      name="mSource1"
       :disabled="!sources.source1"
       :order="3"
     >
@@ -69,6 +70,7 @@ export default defineComponent({
     </TeleportSource>
     <TeleportSource
       to="outlet-multiple"
+      name="mSource2"
       :disabled="!sources.source2"
       :order="1"
     >
@@ -76,6 +78,7 @@ export default defineComponent({
     </TeleportSource>
     <TeleportSource
       to="outlet-multiple"
+      name="mSource3"
       :disabled="!sources.source3"
       :order="2"
     >
