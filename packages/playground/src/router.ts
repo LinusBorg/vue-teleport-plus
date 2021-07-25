@@ -2,6 +2,7 @@ import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 import SingleTeleport from './views/SingleTeleport.vue'
 import MultipleSources from './views/MultipleSources.vue'
 import CustomOutlet from './views/CustomOutlet.vue'
+import Transition from './views/Transition.vue'
 import Home from './views/Home.vue'
 
 export const routes: RouteRecordRaw[] = [
@@ -36,6 +37,11 @@ export const routes: RouteRecordRaw[] = [
       title: 'Customizing Outlet Elements',
     },
     component: CustomOutlet,
+  },
+  {
+    path: '/transitions',
+    name: 'transitions',
+    component: Transition,
   },
 ]
 

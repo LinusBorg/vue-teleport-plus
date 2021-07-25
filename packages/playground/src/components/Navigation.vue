@@ -46,7 +46,17 @@
       >
         <router-link to="/custom-outlet">Customizing Outlet</router-link>
       </li>
-      <li class="px-2">Transition</li>
+      <li
+        class="
+          px-2
+          hover:ml-2
+          border-b-1 border-transparent
+          hover:border-white
+          transition-all
+        "
+      >
+        <router-link to="/transitions">Transitions</router-link>
+      </li>
       <li class="px-2">Transition Group</li>
       <li class="px-2">Re-Ordering Items</li>
     </ul>

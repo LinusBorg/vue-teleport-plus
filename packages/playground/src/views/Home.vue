@@ -10,5 +10,9 @@
       Teleports need a wrapper element to mount into. The elements created by
       TeleportOutlet can be customized through a tag prop and a wrapper slot.
     </DemoCard>
+    <DemoCard title="Transitioning Portal Content" to="/transitions">
+      Teleports need a wrapper element to mount into. The elements created by
+      TeleportOutlet can be customized through a tag prop and a wrapper slot.
+    </DemoCard>
   </div>
 </template>

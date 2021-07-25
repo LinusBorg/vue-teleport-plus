@@ -1,6 +1,6 @@
 <script lang="ts">
 import { TeleportSource } from '@linusborg/vue-teleport-plus'
-import TestContent from './TestContent.vue'
+import TestContent from '../../components/TestContent.vue'
 import { defineComponent, ref } from 'vue'
 
 export default defineComponent({
@@ -25,8 +25,7 @@ export default defineComponent({
   <h3 class="text-xl font-bold">Source</h3>
   <p class="mb-2 mt-1">This is where content comes from</p>
   <Button @click="toggle" data-test-btn="toggle">
-    {{ disabled ? 'Activate' : 'Deactivate' }}
-    Source
+    {{ disabled ? 'Teleport to Outlet' : 'Move content back' }}
   </Button>
   <hr class="my-3" />
   <div data-test="source1">
