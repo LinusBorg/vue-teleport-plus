@@ -59,11 +59,11 @@ export function createCoordinator() {
   ) {
     const target = outletTargets[outlet]?.[source]
     // when oulet is being unmounted by its parent,
-    // we have to make source update synchronously
-    // so Source can unmount its portal contents
+    // we have to make the Source update synchronously
+    // so Source can unmount its portal contents.
     // we use an eventbus signal for this.
-    if (!mounted) bus.emit(target.source)
     if (target) {
+      if (!mounted) bus.emit(target.source)
       target.mounted = mounted
     }
   }
