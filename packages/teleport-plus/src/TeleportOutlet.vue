@@ -71,8 +71,6 @@ export default defineComponent({
       :enabled="state[id].enabled"
       :data-teleport-plus="id"
       :key="id"
-      :onVnodeMounted="() => onMountedHandler(id)"
-      :onVnodeBeforeUnmount="() => onUnmountedHandler(id)"
     />
   </template>
   <template v-else>
@@ -82,8 +80,6 @@ export default defineComponent({
       :is="tag"
       :key="id"
       :data-teleport-plus="id"
-      @vnodeMounted="onMountedHandler(id)"
-      @vnodeBeforeUnmount="onUnmountedHandler(id)"
     />
   </template>
 </template>
