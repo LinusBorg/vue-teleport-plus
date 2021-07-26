@@ -9,12 +9,14 @@
     "packages/*"
   ],
   "scripts": {
-    "start": "lerna run start --stream --parallel --scope '@linusborg/*'",
-    "test": "lerna run test --stream --scope '@linusborg/*'  --",
-    "test:ci": "lerna run test:ci --stream --scope '@linusborg/*'  -- --ci --coverage --maxWorkers=2",
-    "lint": "lerna run lint -- --fix",
-    "build": "lerna run build --scope '@linusborg/*'",
     "play": "cd packages/playground && yarn start",
+    "build": "lerna run build --scope '@linusborg/*'",
+    "test": "lerna run test --stream --scope '@linusborg/*'  --",
+    "lint": "lerna run lint -- --fix",
+    "test:ci": "lerna run test:ci --stream --scope '@linusborg/*'  -- --ci --coverage --maxWorkers=2",
+    "lint:ci": "lerna run lint --maxWarnings=0",
+    "docs:dev": "cd packages/docs && yarn start",
+    "docs:build": "cd packages/docs && yarn build",
     "cypress": "cypress run --config-file cypress/cypress.json",
     "cypress:open": "cypress open --config-file cypress/cypress.json"
   },
