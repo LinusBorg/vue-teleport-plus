@@ -2,8 +2,8 @@
 home: true
 heroImage: /logo.png
 heroAlt: Logo of this library
-heroText: Vue Monorepo
-tagline: Template for developing vue libraries in a monorepo
+heroText: Vue Teleportal
+tagline: Vue3's Teleport on steroids.
 actionText: Get Started
 actionLink: /guide/
 features:
