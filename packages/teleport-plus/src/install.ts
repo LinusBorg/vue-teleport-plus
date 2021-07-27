@@ -1,7 +1,7 @@
 import { App, toRaw, watch } from 'vue'
 import { createCoordinator, coordinatorKey, Coordinator } from './coordinator'
-import TeleportOutlet from './TeleportOutlet.vue'
-import TeleportSource from './TeleportSource.vue'
+import TeleportOutletComp from './TeleportOutlet.vue'
+import TeleportSourceComp from './TeleportSource.vue'
 
 export interface PluginOptions {
   teleportOutlet?: string | false
@@ -16,8 +16,8 @@ const defaultOptions: PluginOptions = {
 
 export function install(app: App, options: PluginOptions = {}) {
   const {
-    teleportOutlet,
-    teleportSource,
+    teleportOutlet = 'TeleportOutlet',
+    teleportSource = 'TeleportSource',
     coordinator: _coordinator,
   } = Object.assign({}, defaultOptions, options)
 
@@ -28,8 +28,8 @@ export function install(app: App, options: PluginOptions = {}) {
 
   watch(coordinator.outletTargets, (c) => console.log(toRaw(c)), { deep: true })
 
-  teleportSource && app.component(teleportSource, TeleportSource)
-  teleportOutlet && app.component(teleportOutlet, TeleportOutlet)
+  teleportSource !== false && app.component(teleportSource, TeleportSourceComp)
+  teleportOutlet !== false && app.component(teleportOutlet, TeleportOutletComp)
 
   app.provide(coordinatorKey, coordinator)
 }
