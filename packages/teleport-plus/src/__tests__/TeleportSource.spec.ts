@@ -21,6 +21,11 @@ const mountSource = (
   return { wrapper, coordinator }
 }
 describe('TeleportSource', () => {
+  beforeAll(() => {
+    const newEl = document.createElement('DIV')
+    newEl.dataset['teleportPlusFallbackTarget'] = undefined
+    document.body.appendChild(newEl)
+  })
   test('adds Connection with generated name', async () => {
     const { wrapper, coordinator } = mountSource({
       props: { to: 'outlet' },
