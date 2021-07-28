@@ -34,6 +34,7 @@ function useBus(name: string) {
 }
 
 export default defineComponent({
+  name: 'TeleportSource',
   props: {
     disabled: {
       type: Boolean,

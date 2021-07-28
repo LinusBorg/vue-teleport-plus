@@ -10,6 +10,7 @@ import { injectCoordinator } from './coordinator'
 import { stableSort } from './stableSort'
 
 export default defineComponent({
+  name: 'TeleportOutlet',
   props: {
     name: {
       type: String,
