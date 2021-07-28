@@ -6,7 +6,7 @@ import type { Coordinator } from './coordinator'
 export function mountOutlet<T extends Element>(
   el: string | T,
   coordinator: Coordinator,
-  autoUnMount?: boolean
+  autoUnmount = true
 ) {
   const vm = getCurrentInstance()!
 
@@ -23,7 +23,7 @@ export function mountOutlet<T extends Element>(
 
   app.mount(el)
 
-  if (autoUnMount) {
+  if (autoUnmount) {
     onUnmounted(() => app.unmount())
   }
 
