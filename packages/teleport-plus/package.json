@@ -28,7 +28,7 @@
     "build:types": "rollup --config ../../config/rollup.types.config.js",
     "build:dev": "BUILD_MINIFY=0 yarn build",
     "typecheck": "vue-tsc src --noEmit",
-    "typecheck:watch": "vue-tsc src --noEmit --watch",
+    "typecheck:w": "vue-tsc src --noEmit --watch",
     "lint": "eslint 'src/**/*.{ts,vue}'",
     "test": "jest --config ../../jest.config.ts --runInBand",
     "test:ci": "jest --config ../../jest.config.ts",
