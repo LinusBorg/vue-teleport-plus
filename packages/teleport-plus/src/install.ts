@@ -9,17 +9,12 @@ export interface PluginOptions {
   coordinator?: Coordinator
 }
 
-const defaultOptions: PluginOptions = {
-  teleportOutlet: 'TeleportOutlet',
-  teleportSource: 'TeleportSource',
-}
-
 export function install(app: App, options: PluginOptions = {}) {
   const {
-    teleportOutlet = 'TeleportOutlet',
+    teleportOutlet = 'TeleportOutlet', // unnecessary but TS complains otherwise ^^
     teleportSource = 'TeleportSource',
     coordinator: _coordinator,
-  } = Object.assign({}, defaultOptions, options)
+  } = options
 
   // TODO: skip in node env
   addFallbackTargetElement()
