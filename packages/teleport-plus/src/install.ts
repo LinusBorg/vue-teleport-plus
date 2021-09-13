@@ -1,5 +1,6 @@
 import type { App } from 'vue'
-import { createCoordinator, coordinatorKey, Coordinator } from './coordinator'
+import { createCoordinator, coordinatorKey } from './coordinator'
+import type { Coordinator } from './coordinator'
 import TeleportOutletComp from './TeleportOutlet.vue'
 import TeleportSourceComp from './TeleportSource.vue'
 

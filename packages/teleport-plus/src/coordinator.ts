@@ -1,4 +1,5 @@
-import { inject, InjectionKey, provide, reactive, readonly } from 'vue'
+import { inject, provide, reactive, readonly } from 'vue'
+import type { InjectionKey } from 'vue'
 import mitt from 'mitt'
 
 interface OutletTargets {

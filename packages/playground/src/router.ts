@@ -1,4 +1,5 @@
-import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
+import { createRouter, createWebHistory } from 'vue-router'
+import type { RouteRecordRaw } from 'vue-router'
 import SingleTeleport from './views/SingleTeleport.vue'
 import MultipleSources from './views/MultipleSources.vue'
 import CustomOutlet from './views/CustomOutlet.vue'
