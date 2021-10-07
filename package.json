@@ -25,6 +25,9 @@
   "lint-staged": {
     "*.{ts,js,vue}": "eslint --max-warnings=0 --fix"
   },
+  "resolutions": {
+    "vscode-vue-languageservice": "0.27.30"
+  },
   "devDependencies": {
     "@linusborg/eslint-config": "^0.1.1",
     "@testing-library/cypress": "^8.0.0",

@@ -1,3 +1,4 @@
+/* eslint-env node */
 import { UserConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import ts from 'rollup-plugin-typescript2'

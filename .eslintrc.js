@@ -2,6 +2,7 @@ module.exports = {
   root: true,
   extends: ['@linusborg/eslint-config'],
   rules: {
+    'no-undef': 'error',
     'vue/script-setup-uses-vars': 'warn',
     'no-restricted-imports': [
       'warn',
@@ -24,9 +25,18 @@ module.exports = {
       },
     },
     {
-      files: ['./*.js', 'config/*.js'],
+      files: ['./*.{js,ts}', 'config/*.{ts,js}'],
       env: {
         node: true,
+      },
+    },
+    {
+      files: ['./**/*.vue'],
+      globals: {
+        defineProps: 'readonly',
+        defineEmits: 'readonly',
+        defineExpose: 'readonly',
+        withDefaults: 'readonly',
       },
     },
   ],
