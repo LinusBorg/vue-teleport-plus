@@ -13,7 +13,7 @@
     "vue-router": "^4.0.5"
   },
   "devDependencies": {
-    "vite": "^2.0.5",
+    "vite": "^2.6.13",
     "vite-plugin-windicss": "^1.2.0"
   }
 }

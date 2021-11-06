@@ -24,7 +24,7 @@
     "README.md"
   ],
   "scripts": {
-    "build": "yarn build:lib && yarn build:types",
+    "build": "vite build && yarn build:types",
     "build:types": "rollup --config ../../config/rollup.types.config.js",
     "build:dev": "BUILD_MINIFY=0 yarn build",
     "typecheck": "vue-tsc src --noEmit",
